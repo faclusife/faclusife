@@ -19,7 +19,19 @@ export const exampleRouter = createTRPCRouter({
     return ctx.prisma.example.findMany();
   }),
 
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
+  getSecretMessage: publicProcedure.query(async () => {
+    const respone = await fetch("https://icanhazdadjoke.com/", {
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json() as Promise<{ joke: string }>)
+      .catch((err) => {
+        console.error(err);
+      });
+    if (respone) {
+      return respone.joke.replace(/\?/g, "?\n");
+    }
+    return "No joke for you";
   }),
 });
