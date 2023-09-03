@@ -1,6 +1,4 @@
-import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
-import Link from "next/link";
 import { useEffect } from "react";
 import LoadingText from "~/components/loading";
 
@@ -49,16 +47,19 @@ function AuthShowcase() {
       {/* <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-[3rem]">
         Random Joke:
       </h2> */}
-      {joke.data &&
-        joke.data.map((a, i) => {
-          return (
-            <h2 className=" text-xl font-extrabold tracking-tight text-white sm:text-[2rem]">
-              {`${a}${
-                joke.data?.length && joke.data.length > 1 && i == 0 ? "?" : ""
-              }`}
-            </h2>
-          );
-        })}
+
+      {joke?.data?.map((a, i) => {
+        return (
+          <h2
+            key={`${i}-row`}
+            className=" text-xl font-extrabold tracking-tight text-white sm:text-[2rem]"
+          >
+            {`${a}${
+              joke.data?.length && joke.data.length > 1 && i == 0 ? "?" : ""
+            }`}
+          </h2>
+        );
+      })}
       <button
         className=" my-5 rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
         onClick={() => {
