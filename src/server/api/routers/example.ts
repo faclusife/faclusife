@@ -30,8 +30,8 @@ export const exampleRouter = createTRPCRouter({
         console.error(err);
       });
     if (respone) {
-      return respone.joke.replace(/\?/g, "?\n");
+      return respone.joke.split("?");
     }
-    return "No joke for you";
+    return null;
   }),
 });
