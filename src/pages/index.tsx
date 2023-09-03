@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect } from "react";
+import LoadingText from "~/components/loading";
 
 import { api } from "~/utils/api";
 
@@ -42,7 +43,7 @@ function AuthShowcase() {
     }
   }, [joke.data]);
   return joke.isLoading ? (
-    <div>Loading...</div>
+    <LoadingText />
   ) : (
     <div className="flex flex-col items-center justify-center gap-4">
       <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-[3rem]">
