@@ -5,8 +5,6 @@ import LoadingText from "~/components/loading";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   return (
     <>
       <Head>
@@ -16,13 +14,6 @@ export default function Home() {
       </Head>
       <main className=" flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          {/* <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Hello
-          </h1>
-          <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-[3rem]">
-            Welcome to Faclusife Website
-          </h2> */}
-
           <AuthShowcase />
         </div>
       </main>
@@ -44,15 +35,11 @@ function AuthShowcase() {
     <LoadingText />
   ) : (
     <div className="flex flex-col items-center justify-center gap-4">
-      {/* <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-[3rem]">
-        Random Joke:
-      </h2> */}
-
       {joke?.data?.map((a, i) => {
         return (
           <h2
             key={`${i}-row`}
-            className=" text-xl font-extrabold tracking-tight text-white sm:text-[2rem]"
+            className=" text-center text-xl font-extrabold leading-9 tracking-tight text-white sm:text-[2rem] "
           >
             {`${a}${
               joke.data?.length && joke.data.length > 1 && i == 0 ? "?" : ""

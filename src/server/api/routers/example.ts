@@ -16,7 +16,7 @@ export const exampleRouter = createTRPCRouter({
   }),
 
   getSecretMessage: publicProcedure.query(async () => {
-    const respone = await fetch("https://icanhazdadjoke.com/", {
+    const response = await fetch("https://icanhazdadjoke.com/", {
       headers: {
         Accept: "application/json",
       },
@@ -25,8 +25,8 @@ export const exampleRouter = createTRPCRouter({
       .catch((err) => {
         console.error(err);
       });
-    if (respone) {
-      return respone.joke.split("?");
+    if (response) {
+      return response.joke.split("?");
     }
     return null;
   }),
