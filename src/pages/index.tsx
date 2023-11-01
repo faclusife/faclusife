@@ -26,11 +26,6 @@ function AuthShowcase() {
     undefined, // no input,
   );
 
-  useEffect(() => {
-    if (joke.data) {
-      console.log(joke.data);
-    }
-  }, [joke.data]);
   return joke.isLoading ? (
     <LoadingText />
   ) : (
