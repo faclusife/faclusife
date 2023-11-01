@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect } from "react";
+
 import LoadingText from "~/components/loading";
 
 import { api } from "~/utils/api";
@@ -45,7 +45,7 @@ function AuthShowcase() {
       <button
         className=" my-5 rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
         onClick={() => {
-          const a = joke.refetch();
+          void joke.refetch();
         }}
       >
         Get another joke

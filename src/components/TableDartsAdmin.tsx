@@ -1,6 +1,5 @@
-/* eslint-disable */
 import { Transition, Dialog } from "@headlessui/react";
-import { Darts } from "@prisma/client";
+import type { Darts } from "@prisma/client";
 import { Fragment, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -11,12 +10,17 @@ type Props = {
   isLoading: boolean;
 };
 
-export default function TableDartsAdmin({ darts, isLoading }: Props) {
+type UserSubmitForm = {
+  score: number;
+  name: string;
+};
+
+export default function TableDartsAdmin({ darts }: Props) {
   const [openModal, setOpenModal] = useState(false);
   const utils = api.useContext();
   const createRecord = api.example.createDartsRecord.useMutation({
     onSuccess: () => {
-      utils.example.getDartsStats.invalidate();
+      utils.example.getDartsStats.invalidate().catch(console.error);
       setOpenModal(false);
       reset();
       toast.success("Record created");
@@ -30,16 +34,15 @@ export default function TableDartsAdmin({ darts, isLoading }: Props) {
   const cancelButtonRef = useRef(null);
   const {
     register,
-    getValues,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<UserSubmitForm>();
 
-  const createRecordHandler = (data: any) => {
+  const createRecordHandler = (data: UserSubmitForm) => {
     createRecord.mutate({
-      name: data["name"],
-      score: data["score"],
+      name: data.name,
+      score: data.score,
     });
   };
 
@@ -112,9 +115,9 @@ export default function TableDartsAdmin({ darts, isLoading }: Props) {
                               id="score"
                               className=" block w-full rounded-md border-gray-300 pl-1  shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             />
-                            {errors?.["score"]?.message && (
+                            {errors.score?.message && (
                               <p className={"text-sm text-red-400"}>
-                                {errors?.["score"]?.message as string}
+                                {errors.score?.message}
                               </p>
                             )}
                           </div>
@@ -132,17 +135,16 @@ export default function TableDartsAdmin({ darts, isLoading }: Props) {
                               {...register("name", {
                                 required: {
                                   value: true,
-                                  message: "name is required",
+                                  message: "Name is required",
                                 },
                               })}
                               id="name"
                               className=" block w-full rounded-md border-gray-300 pl-1  shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             />
-                            {errors?.["name"]?.message && (
-                              <p className={"text-sm text-red-400"}>
-                                {errors?.["name"]?.message as string}
-                              </p>
-                            )}
+
+                            <p className={"text-sm text-red-400"}>
+                              {errors.name?.message}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -150,14 +152,15 @@ export default function TableDartsAdmin({ darts, isLoading }: Props) {
                   </div>
                   <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                     <button
-                      type="submit"
                       className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                      onClick={handleSubmit(createRecordHandler)}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        void handleSubmit(createRecordHandler)(event);
+                      }}
                     >
                       Add
                     </button>
                     <button
-                      type="button"
                       className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:mt-0 sm:w-auto sm:text-sm"
                       onClick={() => setOpenModal(false)}
                       ref={cancelButtonRef}

@@ -1,13 +1,5 @@
-import { Darts } from "@prisma/client";
+import type { Darts } from "@prisma/client";
 import LoadingText from "./loading";
-
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-  },
-  // More people...
-];
 
 type Props = {
   darts: Partial<Darts>[] | undefined;
