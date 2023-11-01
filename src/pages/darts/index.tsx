@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Brogden & Bohdan Darts Stats</title>
+        <title>Brogden And Bohdan Darts Stats</title>
         <meta name="description" content="Created by @faclusife" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
