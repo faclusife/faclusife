@@ -1,17 +1,14 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
-import Link from "next/link";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import LoadingDarkText from "~/components/LoadingDark";
 import TableDarts from "~/components/TableDarts";
-import Table from "~/components/TableDarts";
 import TableDartsAdmin from "~/components/TableDartsAdmin";
 
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   return (
     <>
       <Head>
@@ -20,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className=" flex min-h-screen flex-col items-center  ">
-        <h1 className=" fond-bold text-4xl ">D202 Darts Stats</h1>
+        <h1 className="fond-bold mt-6 text-4xl ">D202 Darts Stats</h1>
         <AuthShowcase />
       </main>
     </>
@@ -39,6 +36,10 @@ function AuthShowcase() {
     }
     console.log("sessionData", sessionData);
   }, [sessionData]);
+
+  if (darts.isLoading) {
+    return <LoadingDarkText />;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">

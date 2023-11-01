@@ -67,7 +67,14 @@ export default function TableDarts({ darts, isLoading }: Props) {
                       {record.name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {record.updatedAt?.toLocaleString()}
+                      {record.updatedAt?.toLocaleString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}
                     </td>
                   </tr>
                 ))}
