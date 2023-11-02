@@ -24,6 +24,10 @@ export default function Home() {
 function AuthShowcase() {
   const joke = api.example.getSecretMessage.useQuery(
     undefined, // no input,
+    {
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    },
   );
 
   return joke.isLoading ? (
