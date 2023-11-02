@@ -30,7 +30,10 @@ function AuthShowcase() {
   const darts = api.example.getDartsStats.useQuery();
 
   useEffect(() => {
-    if (sessionData?.user && sessionData?.user.name !== "faclusife") {
+    if (
+      sessionData?.user &&
+      sessionData?.user.name !== ("faclusife" || "faclusife2")
+    ) {
       void signOut();
       toast.error("I asked you not to do that");
     }
