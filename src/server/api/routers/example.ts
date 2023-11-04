@@ -37,7 +37,11 @@ export const exampleRouter = createTRPCRouter({
   }),
 
   getDartsStats: publicProcedure.query(async () => {
-    return await prisma.darts.findMany();
+    return await prisma.darts.findMany({
+      orderBy: {
+        score: "desc",
+      },
+    });
   }),
 
   createDartsRecord: protectedProcedure
