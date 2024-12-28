@@ -32,7 +32,8 @@ function AuthShowcase() {
   useEffect(() => {
     if (
       sessionData?.user &&
-      sessionData?.user.name !== ("faclusife" || "faclusife2")
+      sessionData?.user.name !== "faclusife2" &&
+      sessionData?.user.name !== "faclusife"
     ) {
       void signOut();
       toast.error("I asked you not to do that");
