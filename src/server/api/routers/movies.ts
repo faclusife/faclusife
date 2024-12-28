@@ -11,12 +11,18 @@ export const MoviesRouter = createTRPCRouter({
       where: {
         status: "WATCHED",
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   }),
   getAllToWatch: publicProcedure.query(async () => {
     return await prisma.movie.findMany({
       where: {
         status: "TO_WATCH",
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
   }),

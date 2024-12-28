@@ -314,7 +314,7 @@ export default function MoviesPage() {
           </div>
         </Dialog>
       </Transition.Root>
-      <div className="mt-10 flex justify-center text-6xl font-bold">
+      <div className="ml-10 mt-10 flex justify-center text-6xl font-bold lg:ml-0">
         Сайт рейтінга фільмів від Миколи і Богдана
       </div>
       {movies.data?.[0] ? (
@@ -426,6 +426,7 @@ export default function MoviesPage() {
           </div>
         </div>
       )}
+      <div className="my-14"></div>
     </>
   );
 }
