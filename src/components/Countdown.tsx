@@ -1,17 +1,21 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import LoadingText from "./loading";
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 
 const Countdown: React.FC = () => {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [isLoading, setIsLoading] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
   const { time, title } = router.query;
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
-    if (!router.isReady) return; // Wait until the router is ready
+    if (!router.isReady) return;
 
-    const endTime = time; // Get time from query params
+    const endTime = time;
 
     if (endTime && typeof endTime === "string") {
       const countdownDate = new Date(endTime).getTime();
@@ -24,6 +28,7 @@ const Countdown: React.FC = () => {
         if (distance <= 0) {
           clearInterval(interval);
           setTimeLeft("Уже делаеться");
+          setShowConfetti(true); // Show confetti animation
         } else {
           const days = Math.floor(distance / (1000 * 60 * 60 * 24));
           const hours = Math.floor(
@@ -59,6 +64,7 @@ const Countdown: React.FC = () => {
           <p className="text-2xl">{timeLeft}</p>
         </>
       )}
+      {showConfetti && <Confetti width={width} height={height} />}
     </div>
   );
 };
