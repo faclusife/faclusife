@@ -18,7 +18,8 @@ const Countdown: React.FC = () => {
     const endTime = time;
 
     if (endTime && typeof endTime === "string") {
-      const countdownDate = new Date(endTime).getTime();
+      // Parse the endTime as UTC
+      const countdownDate = Date.parse(endTime + "Z"); // Add "Z" to treat it as UTC
       setTimeout(() => setIsLoading(false), 1000); // Data is loaded
 
       const interval = setInterval(() => {
