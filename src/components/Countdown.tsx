@@ -23,7 +23,7 @@ const Countdown: React.FC = () => {
 
         if (distance <= 0) {
           clearInterval(interval);
-          setTimeLeft("Time's up!");
+          setTimeLeft("Уже делаеться");
         } else {
           const days = Math.floor(distance / (1000 * 60 * 60 * 24));
           const hours = Math.floor(
