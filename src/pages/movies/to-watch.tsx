@@ -12,6 +12,7 @@ import Head from "next/head";
 import { format } from "date-fns";
 import { uk } from "date-fns/locale/uk";
 import WarningModal from "~/components/WarningModal";
+import MoviesHeader from "./header";
 
 export default function MoviesPage() {
   const movies = api.movies.getAllToWatch.useQuery();
@@ -314,9 +315,7 @@ export default function MoviesPage() {
           </div>
         </Dialog>
       </Transition.Root>
-      <div className="ml-10 mt-10 flex justify-center text-6xl font-bold lg:ml-0">
-        Сайт рейтінга фільмів від Миколи і Богдана
-      </div>
+      <MoviesHeader />
       {movies.data?.[0] ? (
         <div className="mx-10">
           <button
