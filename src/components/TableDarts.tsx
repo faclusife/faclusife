@@ -25,6 +25,12 @@ export default function TableDarts({ darts, isLoading }: Props) {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
+                    Place
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                  >
                     Score
                   </th>
                   <th
@@ -42,8 +48,11 @@ export default function TableDarts({ darts, isLoading }: Props) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {darts?.map((record) => (
+                {darts?.map((record, i) => (
                   <tr key={record.name + "" + record.score}>
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                      {i + 1}
+                    </td>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                       {record.score}
                     </td>

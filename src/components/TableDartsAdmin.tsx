@@ -4,6 +4,7 @@ import { Fragment, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { api } from "~/utils/api";
+import TableDarts from "./TableDarts";
 
 type Props = {
   darts: Partial<Darts>[] | undefined;
@@ -94,7 +95,33 @@ export default function TableDartsAdmin({ darts }: Props) {
                             create
                           </p>
                         </div>
-
+                        <div className="my-2 sm:col-span-3">
+                          <label
+                            htmlFor="score"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Place
+                          </label>
+                          <div className="mt-1">
+                            <input
+                              type="text"
+                              {...register("score", {
+                                valueAsNumber: true,
+                                required: {
+                                  value: true,
+                                  message: "score is required",
+                                },
+                              })}
+                              id="score"
+                              className=" block w-full rounded-md border-gray-300 pl-1  shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            />
+                            {errors.score?.message && (
+                              <p className={"text-sm text-red-400"}>
+                                {errors.score?.message}
+                              </p>
+                            )}
+                          </div>
+                        </div>
                         <div className="my-2 sm:col-span-3">
                           <label
                             htmlFor="score"
@@ -190,58 +217,7 @@ export default function TableDartsAdmin({ darts }: Props) {
           </button>
         </div>
       </div>
-      <div className="mt-8 flow-root">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                  >
-                    Score
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Date
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {darts?.map((record) => (
-                  <tr key={record.name}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {record.score}
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {record.name}
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {record.updatedAt?.toLocaleString("en-GB", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: true,
-                      })}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <TableDarts darts={darts} isLoading={false} />
     </div>
   );
 }
