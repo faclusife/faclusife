@@ -289,7 +289,7 @@ export default function MoviesPage() {
         </Dialog>
       </Transition.Root>
       <div className="ml-10 mt-10 flex justify-center text-6xl font-bold lg:ml-0">
-        Сайт рейтінга фільмів від Миколи і Богдана
+        {"Сайт рейтінга фільмів від Миколи (Толстого) і Богдана"}
       </div>
       {movies.data?.[0] ? (
         <div className="mx-10">
