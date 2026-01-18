@@ -38,10 +38,14 @@ export const exampleRouter = createTRPCRouter({
 
   getDartsStats: publicProcedure.query(async () => {
     return await prisma.darts.findMany({
-      orderBy: {
-        score: "desc",
-        Priority: "desc",
-      },
+      orderBy: [
+        {
+          score: "desc",
+        },
+        {
+          Priority: "asc",
+        },
+      ],
     });
   }),
 
