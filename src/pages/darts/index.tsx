@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import LoadingDarkText from "~/components/LoadingDark";
+import LoadingText from "~/components/loading";
 import TableDarts from "~/components/TableDarts";
 import TableDartsAdmin from "~/components/TableDartsAdmin";
 
@@ -44,7 +44,11 @@ function AuthShowcase() {
   }, [sessionData]);
 
   if (darts.isLoading) {
-    return <LoadingDarkText />;
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <LoadingText textStyle="text-xl font-bold tracking-tight text-black pt-6" />
+      </div>
+    );
   }
 
   return (

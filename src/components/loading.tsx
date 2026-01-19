@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-function LoadingText() {
+function LoadingText({ textStyle }: { textStyle?: string }) {
   const [loadingText, setLoadingText] = useState("Loading");
+  const styleString = textStyle
+    ? textStyle
+    : "text-2xl font-extrabold tracking-tight  sm:text-[3rem] text-white";
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -29,10 +32,7 @@ function LoadingText() {
 
   return (
     <div>
-      {" "}
-      <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-[3rem]">
-        {loadingText}
-      </h2>
+      <h2 className={styleString}>{loadingText}</h2>
     </div>
   );
 }

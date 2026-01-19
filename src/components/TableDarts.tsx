@@ -9,12 +9,13 @@ type Props = {
 };
 
 export default function TableDarts({ darts, isLoading }: Props) {
-  const [showTime, setShowTime] = useState(false);
+  const [showTime, setShowTime] = useState(
+    localStorage.getItem("darts-show-time") === "true",
+  );
 
   // Load preference
   useEffect(() => {
     const saved = localStorage.getItem("darts-show-time");
-    console.log("saved", saved);
     if (saved !== null) {
       setShowTime(saved === "true");
     }
@@ -26,7 +27,9 @@ export default function TableDarts({ darts, isLoading }: Props) {
   }, [showTime]);
 
   if (isLoading) {
-    return <LoadingText />;
+    return (
+      <LoadingText textStyle="text-xl font-bold tracking-tight text-black pt-6" />
+    );
   }
   if (darts?.length === 0) {
     return <div>No records yet</div>;
