@@ -16,8 +16,10 @@ export default function Home() {
         <meta name="description" content="Created by @faclusife" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className=" flex min-h-screen flex-col items-center  ">
-        <h1 className="fond-bold mt-6 text-4xl ">D202 Darts Stats</h1>
+      <main>
+        <div className="mx-auto w-full max-w-2xl px-0 pt-6 sm:px-4 lg:px-8">
+          <h1 className="text-center text-4xl font-bold">D202 Darts Stats</h1>
+        </div>
         <AuthShowcase />
       </main>
     </>
