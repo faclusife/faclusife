@@ -48,3 +48,7 @@ yarn-error.log*
 e2e/.auth
 
 .npmrc
+
+# examples
+
+.examples/
