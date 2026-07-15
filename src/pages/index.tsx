@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
+// Just added this to redeploy without stupid error.
 export default function Home() {
   return (
     <>
