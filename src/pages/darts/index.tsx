@@ -1,5 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import LoadingText from "~/components/loading";
@@ -18,6 +19,9 @@ export default function Home() {
       </Head>
       <main>
         <div className="mx-auto w-full max-w-2xl px-0 pt-6 sm:px-4 lg:px-8">
+          <Link href="/" className="text-sm text-blue-600 hover:underline">
+            {"← Home"}
+          </Link>
           <h1 className="text-center text-4xl font-bold">D202 Darts Stats</h1>
         </div>
         <AuthShowcase />
